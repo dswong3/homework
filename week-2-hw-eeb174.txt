@@ -1,9 +1,11 @@
+Question 1
 Rodentia
 Rodentia
 Rodentia
 Macroscelidea
 Rodentia
 
+Question 2
 There are 152 unique families
 Abrocomidae
 Acrobatidae
@@ -158,9 +160,20 @@ Viverridae
 Vombatidae
 Ziphiidae
 
+Question 3
+  869  cd sandbox/
+  870  tail -n +2 ../data/Pacifici2013_data.csv | cut -d ';' -f 2-6
+  871  tail -n +2 ../data/Pacifici2013_data.csv | cut -d ';' -f 2-6 | tr -s ';' ' '
+  872  tail -n +2 ../data/Pacifici2013_data.csv | cut -d ';' -f 2-6 | tr -s ';' ' ' | sort -r -n -k 6
+  873  tail -n +2 ../data/Pacifici2013_data.csv | cut -d ';' -f 2-6 | tr -s ';' ' ' | sort -r -n -k 6 > BodyM.csv
+  874  history
+  875  history 7 >> ~/Desktop/eeb-177/homework/week-2-hw-eeb174.txt 
+
+Question 4
 Cetartiodactyla Balaenidae Eubalaena Eubalaena glacialis 22999999.91
 Chiroptera Vespertilionidae Pipistrellus Pipistrellus nanulus 2.51  902  cd CSB/unix/sandbox/
 
+Question 5
   903  wc -l BodyM.csv 
   904  grep Vombatidae BodyM.csv 
   905  grep -c Vombatidae BodyM.csv 
@@ -175,3 +188,21 @@ Chiroptera Vespertilionidae Pipistrellus Pipistrellus nanulus 2.51  902  cd CSB/
   914  grep -r "Gorilla" data/
   915  history
   916  history 15 >> ~/Desktop/eeb-177/homework/week-2-hw-eeb174.txt
+
+Question 6
+2. 566026
+4.16  contigs
+6. 43  grep
+7. contig 00302; numreads 3330
+
+Question 7 
+  996  for file in *.txt; do echo $file "edited-$file"; cp $file ~/Desktop/eeb-177/CSB/unix/sandbox/temp/edited-$file; done
+  997  history 2 >> week-2-hw-eeb174.txt 
+
+Question 8
+Using grep: command 3
+find Pipeline Reading Comprehension: will count lines of all data and list all data files in or below the current directory and sort them
+Matching and Subtracting: commands 2 and 3
+Tracking a Species: order of commands as 7, 5, 4, 3, 1, 2, 6
+Little Women: for file in littlewomen.txt; do grep -w 'Jo|Meg|Beth|Amy' | wc -l; done
+Finding Files With Different Properties: find ./ -type f -mtime -1 -user ahmed
