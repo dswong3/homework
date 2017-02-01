@@ -1,0 +1,39 @@
+Question 1 (1.11.2)
+1) 
+66 times total
+
+2)
+#! /bin/bash
+cut -f 1 $1 | grep -c -w $2
+
+
+3)
+#! /bin/bash
+individual_ids=$(tail -n +2 $1 | tr -s "\t" "," | cut -f 1 $1 uniq)
+for ID in $individual-ids
+do
+	echo "Individual $ID was sampled this many times: "
+	tail -n +2 $1 | tr -s "\t" "," | grep -c $ID $1
+done
+
+Question 2 (1.11.3)
+1) 
+#! /bin/bash
+echo "Name of File: $1"
+row=$(tail -n +1 $1 | wc -1)
+echo "Number of Rows: $rows"
+columns=$(head -n +1 $1 | tr " " "\n" | wc - w)
+echo "Number of Columns: $columns"
+ 
+2) 
+#! /bin/bash
+for feedfile in*.txt
+do
+	row=$(tail -n +1 $feedfile | wc -1)
+	columns=$(head -n +1 $feedfile | tr " " "\n" | wc -w)
+	echo "$feedfile $rows $columns"
+done
+
+3) 
+n58.txt has the most rows
+n56.txt has the most columns
