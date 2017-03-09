@@ -4,6 +4,8 @@ author: "Dustin Wong"
 date: "March 8, 2017"
 output: html_document
 ---
+
+#canids
 ```{r}
 library(ggplot2)
 setwd("/home/eeb177-student/Desktop/eeb-177/homework/week-8-hw-eeb174/")
@@ -46,6 +48,47 @@ max_time_taxa<- which.max(canids$time)
 cat(canids[max_time_taxa,2],canids[max_time_taxa,5], "Ma"
 ```
 
+#delphinidae
+```{r}
+delphinidae <- read.csv("/home/eeb177-student/Desktop/eeb-177/homework/week-8-hw-eeb174/delph-ranges.csv", header =F, as.is = T)
+
+names(delphinidae) <- c("genus", "species", "minage", "maxage")
+head(delphinidae)
+```
+
+```{r}
+delphinidae_occ <- ggplot(delphinidae, aes( species, ymin = maxage, ymax=minage, colour = genus))
+delphinidae_occ <- delphinidae_occ + geom_linerange()
+delphinidae_occ <- delphinidae_occ + theme(legend.position="none")
+delphinidae_occ <- delphinidaee_occ + coord_flip()
+delphinidae_occ <- delphinidae_occ +  theme(axis.text.y = element_text(size=1))
+delphinidae_occ <- delphinidae_occ + theme(axis.ticks.y=element_blank())
+delphinidae_occ <- delphinidae_occ + scale_y_continuous(limits=c(0, 250), expand = c(0, 0), breaks=c(0, 50, 100, 150, 200, 250)) 
+delphinidae_occ <- delphinidae_occ + labs(title = "Delphinidae Fossil Occurrences", x = "Species", y = "Ma ago") + theme(plot.title = element_text(hjust = 0.5, size=22, face = "bold"), axis.title =element_text(size=20)) 
+delphinidae_occ
+```
+
+What taxonomic group is displayed?
+```{r}
+print("delphinidae")
+```
+How many unique fossil species are contained within it?
+```{r}
+cat("Unique species:", nrow(delphinidae))
+```
+How many unique fossil genera?
+```{r}
+genera <- unique(delphinidae$genus)
+cat("Number of Genera:", length(genera))
+```
+What species has the longest time
+```{r}
+delphinidae$time <- delphinidae$maxage - delphinidae$minage
+max_time_taxa<- which.max(delphinidae$time) 
+cat(delphinidae[max_time_taxa,2],delphinidae[max_time_taxa,5], "Ma"
+```
+
+#part 2
 
 #exploring data frames
 Challenge1
