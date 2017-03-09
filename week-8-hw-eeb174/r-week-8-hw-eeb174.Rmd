@@ -27,116 +27,156 @@ canid_occ
 ```
 
 What taxonomic group is displayed?
+```{r}
 print("Canids")
-
+```
 How many unique fossil species are contained within it?
+```{r}
 cat("Unique species:", nrow(canids))
-
+```
 How many unique fossil genera?
+```{r}
 genera <- unique(canids$genus)
 cat("Number of Genera:", length(genera))
-
+```
 What species has the longest time
+```{r}
 canids$time <- canids$maxage - canids$minage
 max_time_taxa<- which.max(canids$time) 
 cat(canids[max_time_taxa,2],canids[max_time_taxa,5], "Ma"
+```
 
 
-
-
-
-## exploring data frames
-#Challenge1
+#exploring data frames
+Challenge1
+```{r}
 df <- data.frame(first = c('Grace'), last = c('Hopper'), lucky_number = c(0), stringsAsFactors = FALSE)
 df <- rbind(df, list('Marie', 'Curie', 238))
 df <- cbind(df, coffeetime = c(TRUE,TRUE))
+```
 
-#Challenge2
+Challenge2
+```{r}
 download.file("https://raw.githubusercontent.com/swcarpentry/r-novice-gapminder/gh-pages/_episodes_rmd/data/gapminder-FiveYearData.csv", destfile = "data/gapminder-FiveYearData.csv") gapminder <- read.csv(file = "data/gapminder-FiveYearData.csv")
 source(file = "scripts/load-gapminder.R")
+```
 
-#Challenge3
-The object gapminder is a data frame with columns, country and continent are factors, year is an integer vector, and pop, lifeExp, and gdpPercap are numeric vectors.
+Challenge3
+```{r}
+#The object gapminder is a data frame with columns, country and continent are factors, year is an integer vector, and pop, lifeExp, and gdpPercap are numeric vectors.
+```
 
 
-
-## subsetting data
-#challenge1
+#subsetting data
+challenge1
+```{r}
 x <- c(5.4, 6.2, 7.1, 4.8, 7.5)
 names(x) <- c('a', 'b', 'c', 'd', 'e')
 print(x)
-1) x[c(2,3,4)]
-2) x[2:4]
-3) x[-c(1,5)]
+#1) 
+x[c(2,3,4)]
+#2) 
+x[2:4]
+#3) 
+x[-c(1,5)]
+```
 
-#challenge 2
+challenge 2
+```{r}
 x <- c(5.4, 6.2, 7.1, 4.8, 7.5)
 names(x) <- c('a', 'b', 'c', 'd', 'e')
 print(x)
 answer: x[-which(names(x) == "g")]
-Only A and C are correct
+#Only A and C are correct
+```
 
-#challenge 3
+challenge 3
+```{r}
 x <- c(5.4, 6.2, 7.1, 4.8, 7.5)
 names(x) <- c('a', 'b', 'c', 'd', 'e')
 print(x)
 answer: x_subset <- x[x4]
 print(x_subset)
+```
 
-#challenge 4
+challenge 4
+```{r}
 m <- matrix(1:18, nrow=3, ncol=6)
 print(m)
-answer: D only
+#answer: D only
+```
 
-#challenge 5
+challenge 5
+```{r}
 xlist <- list(a = "Software Carpentry", b = 1:10, data = head(iris))
 answer: xlist$b[2]
+```
 
-#challenge 6
+challenge 6
+```{r}
 mod <- aov(pop ~ lifeExp, data=gapminder)
 answer: attributes(mod) ## `df.residual` is one of the names of `mod`
 mod$df.residual
+```
 
-#challenge 7
-gapminder[gapminder$year = 1957,]
-corrected: gapminder[gapminder$year == 1957,]
+challenge 7
+```{r}
+#gapminder[gapminder$year = 1957,]
+#corrected: 
+gapminder[gapminder$year == 1957,]
 
-gapminder[,-1:4]
-corrected: gapminder[,-c(1:4)]
+#gapminder[,-1:4]
+#corrected: 
+gapminder[,-c(1:4)]
 
-gapminder[gapminder$lifeExp > 80]
-corrected: gapminder[gapminder$lifeExp > 80,]
+#gapminder[gapminder$lifeExp > 80]
+#corrected: 
+gapminder[gapminder$lifeExp > 80,]
 
-gapminder[1, 4, 5]
-corrected: gapminder[1, c(4, 5)]
+#gapminder[1, 4, 5]
+#corrected: 
+gapminder[1, c(4, 5)]
 
-gapminder[gapminder$year == 2002 | 2007,]
-corrected: gapminder[gapminder$year == 2002 | gapminder$year == 2007,]
+#gapminder[gapminder$year == 2002 | 2007,]
+#corrected: 
+gapminder[gapminder$year == 2002 | gapminder$year == 2007,]
 gapminder[gapminder$year %in% c(2002, 2007),]
+```
 
-#challenge 8
-1) gapminder is a data.frame so needs to be subsetted on two dimensions. gapminder[1:20, ] subsets the data to give the first 20 rows and all columns.
-2) gapminder_small <- gapminder[c(1:9, 19:23),]
+challenge 8
+```{r}
+#1) gapminder is a data.frame so needs to be subsetted on two dimensions. gapminder[1:20, ] subsets the data to give the first 20 rows and all columns.
+#2) 
+gapminder_small <- gapminder[c(1:9, 19:23),]
+```
 
 
-
-## Creating Publication-Quality Graphics
-#challenge 1
+#Creating Publication-Quality Graphics
+challenge 1
+```{r}
 ggplot(data = gapminder, aes(x = year, y = lifeExp)) + geom_point()
+```
 
-#challenge2
+challenge2
+```{r}
 ggplot(data = gapminder, aes(x = year, y = lifeExp, color=continent)) + geom_point()
 #seems to be expected based on how rich/developed the region is
+```
 
-#challenge3
+challenge3
+```{r}
 ggplot(data = gapminder, aes(x=year, y=lifeExp, by=country)) + geom_point() + geom_line(aes(color=continent))
+```
 
-#challenge4a&4b
+challenge4a&4b
+```{r}
 ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp)) + geom_point(size=3, color="orange") + scale_x_log10() + geom_smooth(method="lm", size=1.5)
 
 ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp, color = continent)) + geom_point(size=3, pch=17) + scale_x_log10() + geom_smooth(method="lm", size=1.5)
+```
 
-#challenge5
+challenge5
+```{r}
 ggplot(data = gapminder, aes(x = gdpPercap, fill=continent)) + geom_density(alpha=0.6) + facet_wrap( ~ year) + scale_x_log10()
-
+```
 
